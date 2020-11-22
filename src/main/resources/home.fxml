@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.AmbientLight?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HomeController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="167.0" style="-fx-background-color: #6C11DF;">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="1.0" layoutY="129.0" prefHeight="38.0" prefWidth="200.0" text="Albums" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutY="167.0" prefHeight="38.0" prefWidth="200.0" text="Cart" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutY="205.0" prefHeight="38.0" prefWidth="200.0" text="Account" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <Label alignment="CENTER" prefHeight="72.0" prefWidth="200.0" text="HHProject" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="1.0" layoutY="530.0" prefHeight="38.0" prefWidth="200.0" style="-fx-border-color: #F4F4F4;" text="Log out" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="1.0" layoutY="495.0" text="Logged as: " textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font></Label>
+            <Label fx:id="accountLabel" layoutX="87.0" layoutY="495.0" prefHeight="18.0" prefWidth="62.0" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font></Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutY="71.0" stroke="WHITE" strokeType="INSIDE" width="202.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutY="243.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+            <JFXButton layoutX="2.0" layoutY="91.0" prefHeight="38.0" prefWidth="200.0" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <AmbientLight color="CHARTREUSE" layoutX="188.0" layoutY="14.0" lightOn="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="570.0" prefWidth="714.0" style="-fx-border-color: #6C11DF; -fx-background-color: #ffffff;">
+         <children>
+            <AnchorPane prefHeight="38.0" prefWidth="713.0" style="-fx-background-color: #6C11DF #6C11DF;" />
+         </children></AnchorPane>
+   </children>
+</HBox>

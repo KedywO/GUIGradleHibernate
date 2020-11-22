@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="752.0" style="-fx-border-color: #6c11df; -fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginController">
+    <children>
+        <AnchorPane layoutX="392.0" layoutY="9.0" prefHeight="380.0" prefWidth="355.0" style="-fx-background-color: #FFFFFF;">
+            <children>
+                <Label layoutX="59.0" layoutY="127.0" text="Username" textAlignment="CENTER">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="59.0" layoutY="207.0" text="Password">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <JFXPasswordField fx:id="passwordField" focusColor="#6c11df" focusTraversable="false" layoutX="59.0" layoutY="227.0" prefHeight="25.0" prefWidth="268.0" promptText="Password" />
+                <JFXTextField fx:id="loginField" focusColor="#6c11df" focusTraversable="false" layoutX="59.0" layoutY="147.0" prefHeight="25.0" prefWidth="268.0" promptText="Username" />
+                <JFXButton fx:id="loginBtn" buttonType="RAISED" defaultButton="true" focusTraversable="false" layoutX="59.0" layoutY="295.0" onAction="#loginBtnOnAction" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: #6C11DF;" text="Login" textFill="WHITE" />
+                <JFXButton fx:id="closeBtn" buttonType="RAISED" cancelButton="true" focusTraversable="false" layoutX="59.0" layoutY="343.0" onAction="#closeBtnButtonOnAction" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: #6C11DF;" text="Cancel" textFill="WHITE" />
+                <ImageView fx:id="shieldIcon" fitHeight="96.0" fitWidth="96.0" focusTraversable="true" layoutX="146.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="true">
+                    <image>
+                        <Image url="@../java/gui/images/shieldImage.png" />
+                    </image>
+                    <viewport>
+                        <Rectangle2D height="96.0" width="96.0" />
+                    </viewport>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="-16.0" prefHeight="399.0" prefWidth="408.0" style="-fx-background-color: #6C11DF;">
+            <children>
+                <Label layoutX="51.0" layoutY="28.0" prefHeight="59.0" prefWidth="342.0" text="Welcome to the HHProject v1.0" textFill="WHITE">
+                    <font>
+                        <Font name="Calibri" size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="51.0" layoutY="87.0" text="Don't have an account? " textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <JFXButton fx:id="registerBtn" focusTraversable="false" layoutX="200.0" layoutY="82.0" onAction="#registerBtnOnAction" style="-fx-background-color: #6C11DF;" text="Register now." textFill="WHITE" underline="true">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXButton>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

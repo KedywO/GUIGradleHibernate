@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+    //id 'jfoenix'
+    id 'idea'
+}
+
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.openjfx/javafx-fxml
+    compile group: 'org.openjfx', name: 'javafx-fxml', version: '11.0.2'
+    compile group: 'org.openjfx', name: 'javafx-controls', version: '11.0.2'
+    compile group: 'com.jfoenix', name: 'jfoenix', version: '9.0.10'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: '11.0.2'
+    implementation "org.hibernate:hibernate-core:5.4.24.Final"
+}
+
+javafx {
+    version = "11.0.2"
+    modules = ['javafx.controls', 'javafx.fxml']
+
+}
+sourceSets.main {
+    java {
+        srcDir 'src/main/java' //assume that your source codes are inside this path
+    }
+    resources {
+        srcDirs = ['src/main/java', 'src/main/resources']
+        exclude "**/*.java"
+    }
+}
+
+
+mainClassName = 'gui.Main'
+
+run {
+    standardInput = System.in
+}
+
+
+
