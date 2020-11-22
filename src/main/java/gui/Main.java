@@ -16,10 +16,8 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 752, 399));
         primaryStage.show();
     }
-    //CHECKING PUSH GIT
-    public void gitTest(){
-        System.out.println("Good Git");
-    }
+
+
 
     public static void main(String[] args) {
         launch(args);
