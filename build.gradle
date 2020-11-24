@@ -38,7 +38,7 @@ sourceSets.main {
 }
 
 
-mainClassName = 'gui.Main'
+mainClassName = 'gui.ProjectMethods'
 
 run {
     standardInput = System.in
