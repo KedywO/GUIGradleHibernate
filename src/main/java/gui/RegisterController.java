@@ -9,8 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.stage.StageStyle;
@@ -49,6 +51,8 @@ public class RegisterController extends ProjectMethods implements Initializable 
     @FXML
     private JFXTextField cityField, usernameField, emailField;
     @FXML
+    private Label registerInfoLabel;
+    @FXML
     private JFXPasswordField passwordField,confirmPasswordField;
     private  EntityManagerFactory entityManagerFactory;
     @Override
@@ -59,6 +63,7 @@ public class RegisterController extends ProjectMethods implements Initializable 
             EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GUIGradleHibernate");
             setCon(entityManagerFactory);
         }).start();
+
 
     }
     public void registerBtnOnAction(ActionEvent actionEvent) {
@@ -79,31 +84,58 @@ public class RegisterController extends ProjectMethods implements Initializable 
             criteriaQuery.select(root).where(criteriaBuilder.or(mail,username));
             List<User> results = em.createQuery(criteriaQuery).getResultList();
             System.out.println(results);
-            if(results.isEmpty()){
+            if(!results.isEmpty()&&results.get(0).getUsername().equals(usernameField.getText())){
+                registerInfoLabel.setTextFill(Color.RED);
+                registerInfoLabel.setText("Username taken!");
+
+            }
+            else if(!results.isEmpty()){
+                registerInfoLabel.setTextFill(Color.RED);
+                registerInfoLabel.setText("Email taken!");
+            }
+            else if(results.isEmpty()){
+                registerInfoLabel.setTextFill(Color.GREEN);
+                registerInfoLabel.setText("Registered successfully!");
                 em.getTransaction().begin();
                 em.persist(user);
                 em.getTransaction().commit();
                 em.close();
+                usernameField.clear();
+                passwordField.clear();
+                confirmPasswordField.clear();
+                emailField.clear();
+                cityField.clear();
             }
-            getCon().close();
-            usernameField.clear();
-            passwordField.clear();
-            confirmPasswordField.clear();
-            emailField.clear();
-            cityField.clear();
+            //getCon().close();
+
 
         }
-        else {
-            System.out.printf("ERROR");
+        else if(usernameField.getText()==""||emailField.getText()=="") {
+            registerInfoLabel.setTextFill(Color.RED);
+            registerInfoLabel.setText("Username or email field are empty!");
+
+
+        }
+        else if(!emailField.getText().contains("@")){
+
+            registerInfoLabel.setTextFill(Color.RED);
+            registerInfoLabel.setText("Make sure email contains right marks!");
+        }
+        else if(!passwordField.getText().equals(confirmPasswordField.getText())){
+            registerInfoLabel.setTextFill(Color.RED);
+            registerInfoLabel.setText("Passwords doesn't match!");
+
         }
 
     }
     public void backBtnOnAction(ActionEvent actionEvent) {
         closeHandler(actionEvent);
+        getCon().close();
         createLoginForm();
     }
     public void cancelBtnOnAction(ActionEvent actionEvent) {
         closeHandler(actionEvent);
+        getCon().close();
     }
     public void setCon(EntityManagerFactory em){
         this.entityManagerFactory=em;
