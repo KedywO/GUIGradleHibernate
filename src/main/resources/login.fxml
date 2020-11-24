@@ -29,7 +29,7 @@
                 <JFXTextField fx:id="loginField" focusColor="#6c11df" focusTraversable="false" layoutX="59.0" layoutY="147.0" prefHeight="25.0" prefWidth="268.0" promptText="Username" />
                 <JFXButton fx:id="loginBtn" buttonType="RAISED" defaultButton="true" focusTraversable="false" layoutX="59.0" layoutY="295.0" onAction="#loginBtnOnAction" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: #6C11DF;" text="Login" textFill="WHITE" />
                 <JFXButton fx:id="closeBtn" buttonType="RAISED" cancelButton="true" focusTraversable="false" layoutX="59.0" layoutY="343.0" onAction="#closeBtnButtonOnAction" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: #6C11DF;" text="Cancel" textFill="WHITE" />
-                <ImageView fx:id="shieldIcon" fitHeight="96.0" fitWidth="96.0" focusTraversable="true" layoutX="146.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" visible="true">
+                <ImageView fx:id="shieldIcon" fitHeight="96.0" fitWidth="96.0" focusTraversable="true" layoutX="145.0" pickOnBounds="true" preserveRatio="true" visible="true">
                     <image>
                         <Image url="@../java/gui/images/shieldImage.png" />
                     </image>
@@ -40,6 +40,11 @@
                         <Cursor fx:constant="DEFAULT" />
                     </cursor>
                 </ImageView>
+            <Label fx:id="loginInfoLabel" alignment="CENTER" focusTraversable="false" layoutX="60.0" layoutY="96.0" prefHeight="25.0" prefWidth="268.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
         <AnchorPane layoutX="-16.0" prefHeight="399.0" prefWidth="408.0" style="-fx-background-color: #6C11DF;">
