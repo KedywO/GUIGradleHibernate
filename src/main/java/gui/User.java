@@ -1,15 +1,65 @@
 package gui;
 
-public class User {
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import javax.persistence.Column;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
+    @Column(name = "name")
     private String username;
-    private int wallet;
-    private int chart;
+    @Column(name = "wallet")
+    private int wallet=0;
+    private int chart=0;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "mail")
+    private String mail;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name = "userid")
+    private int id;
 
-    public User(){
-        this.username="test";
-        this.chart=1;
-        this.wallet= 1000;
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", wallet=" + wallet +
+                ", chart=" + chart +
+                ", password='" + password + '\'' +
+                ", city='" + city + '\'' +
+                ", mail='" + mail + '\'' +
+                ", id=" + id +
+                '}';
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getUsername() {
@@ -34,5 +84,14 @@ public class User {
 
     public void setChart(int chart) {
         this.chart = chart;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Id
+    public int getId() {
+        return id;
     }
 }

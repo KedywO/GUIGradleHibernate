@@ -17,6 +17,7 @@ dependencies {
     compile group: 'org.openjfx', name: 'javafx-fxml', version: '11.0.2'
     compile group: 'org.openjfx', name: 'javafx-controls', version: '11.0.2'
     compile group: 'com.jfoenix', name: 'jfoenix', version: '9.0.10'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
     implementation group: 'org.openjfx', name: 'javafx-fxml', version: '11.0.2'
     implementation "org.hibernate:hibernate-core:5.4.24.Final"
 }
@@ -42,6 +43,7 @@ mainClassName = 'gui.Main'
 run {
     standardInput = System.in
 }
+
 
 
 

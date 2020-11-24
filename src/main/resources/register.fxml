@@ -45,11 +45,11 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXPasswordField focusTraversable="false" layoutX="105.0" layoutY="281.0" prefHeight="25.0" prefWidth="389.0" />
-      <JFXPasswordField focusTraversable="false" layoutX="105.0" layoutY="341.0" prefHeight="25.0" prefWidth="389.0" />
-      <JFXTextField focusTraversable="false" layoutX="105.0" layoutY="161.0" prefHeight="25.0" prefWidth="389.0" />
-      <JFXTextField focusTraversable="false" layoutX="105.0" layoutY="221.0" prefHeight="25.0" prefWidth="389.0" />
-      <JFXTextField focusTraversable="false" layoutX="105.0" layoutY="401.0" prefHeight="25.0" prefWidth="389.0" />
+      <JFXPasswordField fx:id="passwordField" focusTraversable="false" layoutX="105.0" layoutY="281.0" prefHeight="25.0" prefWidth="389.0" />
+      <JFXPasswordField fx:id="confirmPasswordField" focusTraversable="false" layoutX="105.0" layoutY="341.0" prefHeight="25.0" prefWidth="389.0" />
+      <JFXTextField fx:id="usernameField" focusTraversable="false" layoutX="105.0" layoutY="161.0" prefHeight="25.0" prefWidth="389.0" />
+      <JFXTextField fx:id="emailField" focusTraversable="false" layoutX="105.0" layoutY="221.0" prefHeight="25.0" prefWidth="389.0" />
+      <JFXTextField fx:id="cityField" focusTraversable="false" layoutX="105.0" layoutY="401.0" prefHeight="25.0" prefWidth="389.0" />
       <Label layoutX="105.0" layoutY="381.0" text="City">
          <font>
             <Font size="14.0" />

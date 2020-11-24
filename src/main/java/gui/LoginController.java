@@ -39,7 +39,7 @@ public class LoginController extends ProjectMethods implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //File n = new File("C:\\Users\\kodzi\\IdeaProjects\\ProjecktGUI\\src\\sample\\images\\shieldImage.png");
         //Image shieldImage = new Image(n.toURI().toString());
-        shieldIcon.setImage(new Image(new File("C:\\Users\\Radek\\IdeaProjects\\GUIGradleHibernate\\src\\main\\java\\gui\\images\\shieldImage.png").toURI().toString()));
+        shieldIcon.setImage(new Image(new File("C:\\Users\\kodzi\\IdeaProjects\\GUIGradleHibernate\\src\\main\\java\\gui\\images\\shieldImage.png").toURI().toString()));
 
     }
 
