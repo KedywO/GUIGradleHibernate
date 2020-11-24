@@ -50,24 +50,27 @@ public class RegisterController extends ProjectMethods implements Initializable 
     private JFXTextField cityField, usernameField, emailField;
     @FXML
     private JFXPasswordField passwordField,confirmPasswordField;
-
+    private  EntityManagerFactory entityManagerFactory;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image = new Image(new File("C:\\Users\\kodzi\\IdeaProjects\\GUIGradleHibernate\\src\\main\\java\\gui\\images\\registrationImage.png").toURI().toString());
-        registerImage.setImage(image);       
+        registerImage.setImage(image);
+        new Thread(()->{
+            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GUIGradleHibernate");
+            setCon(entityManagerFactory);
+        }).start();
+
     }
     public void registerBtnOnAction(ActionEvent actionEvent) {
         if(emailField.getText().contains("@")&&usernameField.getText()!=""&&emailField.getText()!=""&&passwordField.getText()!=""&&passwordField.getText().equals(confirmPasswordField.getText()))
         {
             User user = new User();
-
             user.setUsername(usernameField.getText());
             user.setPassword(passwordField.getText());
             user.setCity(cityField.getText());
             user.setMail(emailField.getText());
-            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GUIGradleHibernate");
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("GUIGradleHibernate");
-            EntityManager em = ef.createEntityManager();
+
+            EntityManager em = getCon().createEntityManager();
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
             Root<User> root = criteriaQuery.from(User.class);
@@ -75,7 +78,6 @@ public class RegisterController extends ProjectMethods implements Initializable 
             Predicate username = criteriaBuilder.like(root.get("username"),usernameField.getText());
             criteriaQuery.select(root).where(criteriaBuilder.or(mail,username));
             List<User> results = em.createQuery(criteriaQuery).getResultList();
-
             System.out.println(results);
             if(results.isEmpty()){
                 em.getTransaction().begin();
@@ -83,7 +85,7 @@ public class RegisterController extends ProjectMethods implements Initializable 
                 em.getTransaction().commit();
                 em.close();
             }
-            entityManagerFactory.close();
+            getCon().close();
             usernameField.clear();
             passwordField.clear();
             confirmPasswordField.clear();
@@ -102,6 +104,12 @@ public class RegisterController extends ProjectMethods implements Initializable 
     }
     public void cancelBtnOnAction(ActionEvent actionEvent) {
         closeHandler(actionEvent);
+    }
+    public void setCon(EntityManagerFactory em){
+        this.entityManagerFactory=em;
+    }
+    public EntityManagerFactory getCon(){
+        return entityManagerFactory;
     }
 
 
