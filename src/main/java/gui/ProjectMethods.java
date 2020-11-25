@@ -1,11 +1,13 @@
 package gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.sun.istack.NotNull;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.hibernate.Criteria;
@@ -20,9 +22,10 @@ import javax.persistence.criteria.Root;
 import java.io.IOException;
 import java.util.List;
 
+import static javafx.scene.paint.Color.TRANSPARENT;
+
 public class ProjectMethods extends Application {
     private User user;
-
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -31,8 +34,6 @@ public class ProjectMethods extends Application {
         primaryStage.setScene(new Scene(root, 752, 399));
         primaryStage.show();
     }
-
-
 
     public static void main(String[] args) {
         launch(args);
@@ -43,7 +44,6 @@ public class ProjectMethods extends Application {
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
     }
-
 
     public void createRegisterForm(){
         try {
@@ -58,8 +58,8 @@ public class ProjectMethods extends Application {
             e.printStackTrace();
             e.getCause();
         }
-
     }
+
     public boolean checkUser(String login, String password, EntityManagerFactory entityManagerFactory){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder= entityManager.getCriteriaBuilder();
@@ -78,7 +78,8 @@ public class ProjectMethods extends Application {
         }
         return false;
     }
-    public void setUser(String login, String password,EntityManagerFactory entityManagerFactory){
+
+    public void setUser(String login, String password, @NotNull EntityManagerFactory entityManagerFactory){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder= entityManager.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
@@ -90,20 +91,25 @@ public class ProjectMethods extends Application {
         entityManager.close();
         this.user = results.get(0);
     }
+
     public void createHomeForm(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("home.fxml"));
             Parent root = loader.load();
             HomeController controller = loader.getController();
-            controller.setAccountLabel(user);
+
+
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root, 907,600));
+            stage.setScene(new Scene(root, 923,570));
+
+            controller.setUser(user);
             stage.show();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+
     public void createLoginForm(){
         try {
             Parent root = null;

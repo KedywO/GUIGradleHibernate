@@ -66,6 +66,7 @@ public class RegisterController extends ProjectMethods implements Initializable 
 
 
     }
+
     public void registerBtnOnAction(ActionEvent actionEvent) {
         if(emailField.getText().contains("@")&&usernameField.getText()!=""&&emailField.getText()!=""&&passwordField.getText()!=""&&passwordField.getText().equals(confirmPasswordField.getText()))
         {
@@ -128,23 +129,25 @@ public class RegisterController extends ProjectMethods implements Initializable 
         }
 
     }
+
     public void backBtnOnAction(ActionEvent actionEvent) {
         closeHandler(actionEvent);
         getCon().close();
         createLoginForm();
     }
+
     public void cancelBtnOnAction(ActionEvent actionEvent) {
         closeHandler(actionEvent);
         getCon().close();
     }
+
     public void setCon(EntityManagerFactory em){
         this.entityManagerFactory=em;
     }
+
     public EntityManagerFactory getCon(){
         return entityManagerFactory;
     }
-
-
 }
 
 

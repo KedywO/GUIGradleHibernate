@@ -1,7 +1,5 @@
 package gui;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import javax.persistence.Column;
 import java.io.Serializable;
@@ -20,6 +18,8 @@ public class User implements Serializable {
     private String city;
     @Column(name = "mail")
     private String mail;
+    @Column(name = "orders")
+    private int orders=0;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@Column(name = "userid")
@@ -80,6 +80,14 @@ public class User implements Serializable {
 
     public int getChart() {
         return chart;
+    }
+
+    public int getOrders() {
+        return orders;
+    }
+
+    public void setOrders(int orders) {
+        this.orders = orders;
     }
 
     public void setChart(int chart) {

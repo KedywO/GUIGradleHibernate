@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -30,16 +31,18 @@ import java.util.ResourceBundle;
 
 public class LoginController extends ProjectMethods implements Initializable {
     @FXML
-    private JFXButton loginBtn, closeBtn,registerBtn;
+    private JFXTextField loginField;
     @FXML
     private JFXPasswordField passwordField;
     @FXML
-    private JFXTextField loginField;
+    private JFXButton loginBtn, closeBtn,registerBtn;
     @FXML
     private ImageView shieldIcon;
     private EntityManagerFactory entityManagerFactory;
     @FXML
     private Label loginInfoLabel;
+    @FXML
+    private AnchorPane loginPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,11 +53,8 @@ public class LoginController extends ProjectMethods implements Initializable {
             setCon(entityManagerFactory);
             loginBtn.setDisable(false);
         }).start();
-
-
+        loginPane.setFocusTraversable(true);
     }
-
-
 
     public void loginBtnOnAction(javafx.event.ActionEvent actionEvent) throws InterruptedException {
         if(checkUser(loginField.getText(),passwordField.getText(),getCon())){
@@ -71,19 +71,23 @@ public class LoginController extends ProjectMethods implements Initializable {
             rotateButton(loginBtn);
         }
     }
+
     public void closeBtnButtonOnAction(javafx.event.ActionEvent actionEvent) {
         closeHandler(actionEvent);
         getCon().close();
     }
+
     public void registerBtnOnAction(javafx.event.ActionEvent actionEvent) {
         Stage stage1 = (Stage) registerBtn.getScene().getWindow();
         stage1.close();
         createRegisterForm();
         getCon().close();
     }
+
     public void setCon(EntityManagerFactory em){
         this.entityManagerFactory=em;
     }
+
     public EntityManagerFactory getCon(){
         return entityManagerFactory;
     }
