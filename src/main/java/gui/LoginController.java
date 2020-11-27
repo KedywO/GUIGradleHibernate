@@ -47,21 +47,18 @@ public class LoginController extends ProjectMethods implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         shieldIcon.setImage(new Image(new File("C:\\Users\\kodzi\\IdeaProjects\\GUIGradleHibernate\\src\\main\\java\\gui\\images\\shieldImage.png").toURI().toString()));
-        loginBtn.setDisable(true);
-        new Thread(()->{
-            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GUIGradleHibernate");
-            setCon(entityManagerFactory);
-            loginBtn.setDisable(false);
-        }).start();
         loginPane.setFocusTraversable(true);
     }
 
     public void loginBtnOnAction(javafx.event.ActionEvent actionEvent) throws InterruptedException {
-        if(checkUser(loginField.getText(),passwordField.getText(),getCon())){
-            setUser(loginField.getText(),passwordField.getText(),getCon());
+        setUser("radek","zxc");
+        closeHandler(actionEvent);
+        createHomeForm();
+        /*if(checkUser(loginField.getText(),passwordField.getText())){
+            setUser(loginField.getText(),passwordField.getText());
             closeHandler(actionEvent);
             createHomeForm();
-            getCon().close();
+
         }
         else{
             loginInfoLabel.setVisible(false);
@@ -69,28 +66,20 @@ public class LoginController extends ProjectMethods implements Initializable {
             loginInfoLabel.setTextFill(Color.RED);
             loginInfoLabel.setVisible(true);
             rotateButton(loginBtn);
-        }
+        }*/
     }
 
     public void closeBtnButtonOnAction(javafx.event.ActionEvent actionEvent) {
         closeHandler(actionEvent);
-        getCon().close();
+        EMF.emfDestroy();
     }
 
     public void registerBtnOnAction(javafx.event.ActionEvent actionEvent) {
         Stage stage1 = (Stage) registerBtn.getScene().getWindow();
         stage1.close();
         createRegisterForm();
-        getCon().close();
     }
 
-    public void setCon(EntityManagerFactory em){
-        this.entityManagerFactory=em;
-    }
-
-    public EntityManagerFactory getCon(){
-        return entityManagerFactory;
-    }
 
 
 }

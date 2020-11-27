@@ -4,6 +4,9 @@
 <?import javafx.scene.AmbientLight?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
@@ -60,30 +63,24 @@
       </AnchorPane>
       <AnchorPane layoutX="199.0" prefHeight="570.0" prefWidth="714.0" style="-fx-background-color: #dbdbdb;">
          <children>
-            <AnchorPane layoutY="57.0" prefHeight="513.0" prefWidth="722.0" style="-fx-background-color: #ffffff;" />
-            <AnchorPane layoutY="57.0" prefHeight="513.0" prefWidth="722.0" style="-fx-background-color: #ffffff;" />
-            <AnchorPane layoutY="57.0" prefHeight="513.0" prefWidth="722.0" style="-fx-background-color: #ffffff;" />
+            <AnchorPane layoutY="57.0" prefHeight="513.0" prefWidth="730.0" style="-fx-background-color: #ffffff;" />
+            <AnchorPane layoutY="57.0" prefHeight="513.0" prefWidth="730.0" style="-fx-background-color: #ffffff;" />
             <AnchorPane prefHeight="57.0" prefWidth="750.0" style="-fx-background-color: #6C11DF #6C11DF;">
                <children>
-                  <JFXButton fx:id="exitBtn" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="670.0" onAction="#exitBtnOnAction" prefHeight="26.0" prefWidth="26.0" text="X" textFill="WHITE">
+                  <JFXButton fx:id="exitBtn" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="673.0" layoutY="-6.0" onAction="#exitBtnOnAction" prefHeight="26.0" prefWidth="26.0" text="X" textFill="WHITE">
                      <font>
                         <Font size="27.0" />
                      </font>
                   </JFXButton>
+                  <Label fx:id="panelName" layoutX="50.0" layoutY="12.0" text="Account" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="accountAPane" layoutY="57.0" prefHeight="513.0" prefWidth="722.0" style="-fx-background-color: #ffffff;">
+            <AnchorPane fx:id="accountAPane" layoutY="57.0" prefHeight="513.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <Label layoutX="46.0" layoutY="14.0" text="Account:" textFill="#6c11df">
-                     <font>
-                        <Font name="System Bold" size="26.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="accountLabel2" layoutX="166.0" layoutY="14.0" prefHeight="38.0" prefWidth="220.0" textFill="#6c11df">
-                     <font>
-                        <Font name="System Bold" size="26.0" />
-                     </font>
-                  </Label>
                   <Label layoutX="46.0" layoutY="63.0" text="City:">
                      <font>
                         <Font size="16.0" />
@@ -109,12 +106,12 @@
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="changePasswordBtn" buttonType="RAISED" layoutX="49.0" layoutY="306.0" onAction="#changePasswordBtnOnAction" style="-fx-background-color: #6C11DF;" text="Change password" textFill="WHITE">
+                  <JFXButton fx:id="changePasswordBtn" alignment="CENTER" layoutX="50.0" layoutY="307.0" onAction="#changePasswordBtnOnAction" prefHeight="20.0" prefWidth="140.0" style="-fx-background-color: #6C11DF;" text="Change password" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="newPasswordSaveBtn" alignment="CENTER" buttonType="RAISED" layoutX="573.0" layoutY="306.0" onAction="#setNewPasswordSaveBtnOnAction" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: #6C11DF;" text="Save" textFill="WHITE">
+                  <JFXButton fx:id="newPasswordSaveBtn" alignment="CENTER" layoutX="530.0" layoutY="307.0" onAction="#setNewPasswordSaveBtnOnAction" prefHeight="20.0" prefWidth="140.0" style="-fx-background-color: #6C11DF;" text="Save" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -134,12 +131,12 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="newPasswordField" alignment="CENTER" layoutX="193.0" layoutY="307.0" prefHeight="20.0" prefWidth="154.0" promptText="New password">
+                  <PasswordField fx:id="newPasswordField" alignment="CENTER" layoutX="210.0" layoutY="307.0" prefHeight="20.0" prefWidth="140.0" promptText="New password">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </PasswordField>
-                  <PasswordField fx:id="confirmNewPasswordField" alignment="CENTER" layoutX="390.0" layoutY="306.0" prefHeight="20.0" prefWidth="154.0" promptText="Confirm new password">
+                  <PasswordField fx:id="confirmNewPasswordField" alignment="CENTER" layoutX="370.0" layoutY="307.0" prefHeight="20.0" prefWidth="140.0" promptText="Confirm password">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -156,8 +153,37 @@
                   <Line endX="495.0" layoutX="150.0" layoutY="52.0" startX="-103.0" />
                   <Line endX="495.0" layoutX="153.0" layoutY="295.0" startX="-103.0" />
                   <Line endX="495.0" layoutX="153.0" layoutY="347.0" startX="-103.0" />
+                  <Label layoutX="46.0" layoutY="22.0" text="Name:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="accountLabel2" layoutX="95.0" layoutY="22.0" prefHeight="22.0" prefWidth="231.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="albumsAPane" layoutY="57.0" prefHeight="513.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <ImageView fx:id="albumImg" fitHeight="210.0" fitWidth="237.0" layoutX="56.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../java/gui/images" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="albumNameLabel" layoutX="88.0" layoutY="248.0" prefHeight="35.0" prefWidth="175.0" text="Name">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="albumAuthorLabel" layoutX="88.0" layoutY="296.0" prefHeight="27.0" prefWidth="175.0" text="Author">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="searchField" layoutX="478.0" layoutY="47.0" onKeyPressed="#onEnterPressed" prefHeight="26.0" prefWidth="175.0" text="Search" />
+               </children></AnchorPane>
          </children>
       </AnchorPane>
    </children>

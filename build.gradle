@@ -20,6 +20,11 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
     implementation group: 'org.openjfx', name: 'javafx-fxml', version: '11.0.2'
     implementation "org.hibernate:hibernate-core:5.4.24.Final"
+    compile group: 'org.controlsfx', name: 'controlsfx', version: '11.0.1'
+    implementation group: 'org.controlsfx', name: 'controlsfx', version: '11.0.1'
+
+
+
 }
 
 javafx {

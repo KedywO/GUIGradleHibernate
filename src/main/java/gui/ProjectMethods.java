@@ -36,6 +36,7 @@ public class ProjectMethods extends Application {
     }
 
     public static void main(String[] args) {
+        EMF.emfInitialize();
         launch(args);
     }
 
@@ -60,8 +61,8 @@ public class ProjectMethods extends Application {
         }
     }
 
-    public boolean checkUser(String login, String password, EntityManagerFactory entityManagerFactory){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+    public boolean checkUser(String login, String password ){
+        EntityManager entityManager = EMF.createEntityManager();
         CriteriaBuilder criteriaBuilder= entityManager.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
@@ -79,8 +80,8 @@ public class ProjectMethods extends Application {
         return false;
     }
 
-    public void setUser(String login, String password, @NotNull EntityManagerFactory entityManagerFactory){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+    public void setUser(String login, String password){
+        EntityManager entityManager = EMF.createEntityManager();
         CriteriaBuilder criteriaBuilder= entityManager.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);

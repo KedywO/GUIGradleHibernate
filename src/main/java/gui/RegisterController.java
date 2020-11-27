@@ -59,12 +59,6 @@ public class RegisterController extends ProjectMethods implements Initializable 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image = new Image(new File("C:\\Users\\kodzi\\IdeaProjects\\GUIGradleHibernate\\src\\main\\java\\gui\\images\\registrationImage.png").toURI().toString());
         registerImage.setImage(image);
-        new Thread(()->{
-            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GUIGradleHibernate");
-            setCon(entityManagerFactory);
-        }).start();
-
-
     }
 
     public void registerBtnOnAction(ActionEvent actionEvent) {
@@ -76,7 +70,7 @@ public class RegisterController extends ProjectMethods implements Initializable 
             user.setCity(cityField.getText());
             user.setMail(emailField.getText());
 
-            EntityManager em = getCon().createEntityManager();
+            EntityManager em = EMF.createEntityManager();
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
             Root<User> root = criteriaQuery.from(User.class);
@@ -88,11 +82,12 @@ public class RegisterController extends ProjectMethods implements Initializable 
             if(!results.isEmpty()&&results.get(0).getUsername().equals(usernameField.getText())){
                 registerInfoLabel.setTextFill(Color.RED);
                 registerInfoLabel.setText("Username taken!");
-
+                em.close();
             }
             else if(!results.isEmpty()){
                 registerInfoLabel.setTextFill(Color.RED);
                 registerInfoLabel.setText("Email taken!");
+                em.close();
             }
             else if(results.isEmpty()){
                 registerInfoLabel.setTextFill(Color.GREEN);
@@ -107,7 +102,7 @@ public class RegisterController extends ProjectMethods implements Initializable 
                 emailField.clear();
                 cityField.clear();
             }
-            //getCon().close();
+
 
 
         }
@@ -132,21 +127,12 @@ public class RegisterController extends ProjectMethods implements Initializable 
 
     public void backBtnOnAction(ActionEvent actionEvent) {
         closeHandler(actionEvent);
-        getCon().close();
         createLoginForm();
     }
 
     public void cancelBtnOnAction(ActionEvent actionEvent) {
         closeHandler(actionEvent);
-        getCon().close();
-    }
-
-    public void setCon(EntityManagerFactory em){
-        this.entityManagerFactory=em;
-    }
-
-    public EntityManagerFactory getCon(){
-        return entityManagerFactory;
+        EMF.emfDestroy();
     }
 }
 
