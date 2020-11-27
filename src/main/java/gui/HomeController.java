@@ -118,7 +118,7 @@ public class HomeController extends ProjectMethods implements Initializable {
         hideAllPanes();
         albumsAPane.setVisible(true);
         panelName.setText("Albums");
-        //startSearch();
+        startSearch();
     }
 
     public void exitBtnOnAction(javafx.event.ActionEvent actionEvent){
@@ -140,14 +140,14 @@ public class HomeController extends ProjectMethods implements Initializable {
             albumAuthorLabel.setText(results.get(movieIndex).getAlbumAuthor());
             albumImg.setImage(new Image(new File(results.get(movieIndex).getAlbumImg()).toURI().toString()));
     }
-    /*public void startSearch(){
+    public void startSearch(){
         AutoCompletionBinding<String> autoCompletionBinding = TextFields.bindAutoCompletion(searchField, albumNamesList);
         autoCompletionBinding.setOnAutoCompleted(event ->
                 {
                     setMovieData(albumNamesList.indexOf(searchField.getText()));
                 }
                 );
-    }*/
+    }
 
 
 
