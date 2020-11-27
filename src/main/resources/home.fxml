@@ -232,6 +232,11 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <JFXButton fx:id="addToCartBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="546.0" layoutY="21.0" prefHeight="24.0" prefWidth="164.0" style="-fx-background-color: #6C11DF #6C11DF;" text="Dodaj do koszyka!" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </children>

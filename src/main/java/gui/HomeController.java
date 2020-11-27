@@ -30,7 +30,7 @@ public class HomeController extends ProjectMethods implements Initializable {
     @FXML
     private Label accountLabel,accountLabel2,emailLabel,chartLabel,ordersLabel,cityLabel,panelName,albumNameLabel,albumAuthorLabel,descriptionField,statusLabel,releaseDateLabel;
     @FXML
-    private JFXButton logoutBtn, exitBtn,albumsBtn,changePasswordBtn,newPasswordSaveBtn,accountBtn;
+    private JFXButton logoutBtn, exitBtn,albumsBtn,changePasswordBtn,newPasswordSaveBtn,accountBtn,addToCartBtn;
     @FXML
     private TextField searchField;
     @FXML
@@ -119,6 +119,7 @@ public class HomeController extends ProjectMethods implements Initializable {
         albumsAPane.setVisible(true);
         panelName.setText("Albums");
         startSearch();
+        setMovieData(new Random().nextInt(results.size()));
     }
 
     public void exitBtnOnAction(javafx.event.ActionEvent actionEvent){
