@@ -167,23 +167,73 @@
             </AnchorPane>
             <AnchorPane fx:id="albumsAPane" layoutY="57.0" prefHeight="513.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <ImageView fx:id="albumImg" fitHeight="210.0" fitWidth="237.0" layoutX="56.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="albumImg" fitHeight="210.0" fitWidth="237.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../java/gui/images" />
+                        <Image url="@../java/gui/images/paluch_nadcisnienie.jpg" />
                      </image>
                   </ImageView>
-                  <Label fx:id="albumNameLabel" layoutX="88.0" layoutY="248.0" prefHeight="35.0" prefWidth="175.0" text="Name">
+                  <Label fx:id="albumNameLabel" layoutX="327.0" layoutY="96.0" prefHeight="35.0" prefWidth="175.0" text="Name">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="albumAuthorLabel" layoutX="88.0" layoutY="296.0" prefHeight="27.0" prefWidth="175.0" text="Author">
+                  <Label fx:id="albumAuthorLabel" layoutX="386.0" layoutY="60.0" prefHeight="27.0" prefWidth="175.0" text="Author">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="searchField" layoutX="478.0" layoutY="47.0" onKeyPressed="#onEnterPressed" prefHeight="26.0" prefWidth="175.0" text="Search" />
-               </children></AnchorPane>
+                  <TextField fx:id="searchField" focusTraversable="false" layoutX="273.0" layoutY="20.0" onKeyPressed="#onEnterPressed" prefHeight="26.0" prefWidth="251.0" text="Search">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="releaseDateLabel" layoutX="403.0" layoutY="140.0" prefHeight="27.0" prefWidth="175.0" text="Data wydania">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="statusLabel" layoutX="403.0" layoutY="180.0" prefHeight="27.0" prefWidth="175.0" text="Status">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="descriptionField" alignment="TOP_LEFT" layoutX="20.0" layoutY="276.0" prefHeight="217.0" prefWidth="501.0" textOverrun="CLIP">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="60.0" text="Wykonawca">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="100.0" text="Tytuł">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="140.0" text="Data wydania">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="274.0" layoutY="180.0" text="Data wydania">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Line endX="150.0" layoutX="374.0" layoutY="55.0" startX="-100.0" />
+                  <Line endX="150.0" layoutX="374.0" layoutY="95.0" startX="-100.0" />
+                  <Line endX="150.0" layoutX="374.0" layoutY="135.0" startX="-100.0" />
+                  <Line endX="150.0" layoutX="374.0" layoutY="175.0" startX="-100.0" />
+                  <Line endX="150.0" layoutX="374.0" layoutY="215.0" startX="-100.0" />
+                  <Label layoutX="20.0" layoutY="237.0" text="Opis płyty:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

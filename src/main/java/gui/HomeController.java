@@ -28,7 +28,7 @@ import java.util.List;
 
 public class HomeController extends ProjectMethods implements Initializable {
     @FXML
-    private Label accountLabel,accountLabel2,emailLabel,chartLabel,ordersLabel,cityLabel,panelName,albumNameLabel,albumAuthorLabel;
+    private Label accountLabel,accountLabel2,emailLabel,chartLabel,ordersLabel,cityLabel,panelName,albumNameLabel,albumAuthorLabel,descriptionField,statusLabel,releaseDateLabel;
     @FXML
     private JFXButton logoutBtn, exitBtn,albumsBtn,changePasswordBtn,newPasswordSaveBtn,accountBtn;
     @FXML
@@ -139,6 +139,10 @@ public class HomeController extends ProjectMethods implements Initializable {
             albumNameLabel.setText(results.get(movieIndex).getAlbumName());
             albumAuthorLabel.setText(results.get(movieIndex).getAlbumAuthor());
             albumImg.setImage(new Image(new File(results.get(movieIndex).getAlbumImg()).toURI().toString()));
+            descriptionField.setWrapText(true);
+            descriptionField.setText(results.get(movieIndex).getAlbumDescription());
+            statusLabel.setText(results.get(movieIndex).getStatus());
+            releaseDateLabel.setText(String.valueOf(results.get(movieIndex).getOutYear()));
     }
     public void startSearch(){
         AutoCompletionBinding<String> autoCompletionBinding = TextFields.bindAutoCompletion(searchField, albumNamesList);
