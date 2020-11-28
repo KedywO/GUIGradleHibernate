@@ -1,9 +1,9 @@
 package gui;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javafx.scene.control.Button;
+
+import javax.persistence.*;
 
 @Entity
 public class Albums {
@@ -21,6 +21,28 @@ public class Albums {
     private String albumDescription;
     @Column (name = "albumImg")
     private String albumImg;
+    @Column (name = "price")
+    private int price;
+    @Transient
+    private int quantity=1;
+    @Transient
+    private Button addBtn, subBtn;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public long getAlbumId() {
         return albumId;
@@ -78,6 +100,22 @@ public class Albums {
         this.albumImg = albumImg;
     }
 
+    public Button getAddBtn() {
+        return addBtn;
+    }
+
+    public void setAddBtn(Button addBtn) {
+        this.addBtn = addBtn;
+    }
+
+    public Button getSubBtn() {
+        return subBtn;
+    }
+
+    public void setSubBtn(Button subBtn) {
+        this.subBtn = subBtn;
+    }
+
     @Override
     public String toString() {
         return "Albums{" +
@@ -86,7 +124,9 @@ public class Albums {
                 ", albumAuthor='" + albumAuthor + '\'' +
                 ", status='" + status + '\'' +
                 ", outYear=" + outYear +
-                ", albumDescription='" + albumDescription + '\'' +
+                ", albumImg='" + albumImg + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
                 '}';
     }
 }

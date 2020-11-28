@@ -1,0 +1,30 @@
+.table-view {
+    -fx-background-color: WHITE;
+}
+.table-view {
+    -fx-table-cell-border-color: transparent;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:empty {
+    -fx-background-color: WHITE;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+.table-row-cell:odd:filled {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:even:filled {
+    -fx-background-color: transparent;
+}
+
+.noheader .column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+}

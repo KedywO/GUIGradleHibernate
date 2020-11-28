@@ -4,6 +4,8 @@
 <?import javafx.scene.AmbientLight?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,7 +23,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton alignment="CENTER" focusTraversable="false" layoutY="167.0" prefHeight="38.0" prefWidth="200.0" text="Cart" textFill="WHITE">
+            <JFXButton fx:id="chartBtn" alignment="CENTER" focusTraversable="false" layoutY="167.0" onAction="#chartBtnOnAction" prefHeight="38.0" prefWidth="200.0" text="Cart" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -63,7 +65,6 @@
       </AnchorPane>
       <AnchorPane layoutX="199.0" prefHeight="570.0" prefWidth="714.0" style="-fx-background-color: #dbdbdb;">
          <children>
-            <AnchorPane layoutY="57.0" prefHeight="513.0" prefWidth="730.0" style="-fx-background-color: #ffffff;" />
             <AnchorPane layoutY="57.0" prefHeight="513.0" prefWidth="730.0" style="-fx-background-color: #ffffff;" />
             <AnchorPane prefHeight="57.0" prefWidth="750.0" style="-fx-background-color: #6C11DF #6C11DF;">
                <children>
@@ -182,7 +183,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="searchField" focusTraversable="false" layoutX="273.0" layoutY="20.0" onKeyPressed="#onEnterPressed" prefHeight="26.0" prefWidth="251.0" text="Search">
+                  <TextField fx:id="searchField" focusTraversable="false" layoutX="273.0" layoutY="20.0" onKeyPressed="#onEnterPressed" prefHeight="26.0" prefWidth="251.0" promptText="Search">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -232,13 +233,26 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="addToCartBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="546.0" layoutY="21.0" prefHeight="24.0" prefWidth="164.0" style="-fx-background-color: #6C11DF #6C11DF;" text="Dodaj do koszyka!" textFill="WHITE">
+                  <JFXButton fx:id="addToCartBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="546.0" layoutY="21.0" onAction="#addToCartBtnOnAction" prefHeight="24.0" prefWidth="164.0" style="-fx-background-color: #6C11DF #6C11DF;" text="Dodaj do koszyka!" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
+                  <Label fx:id="inChartLabel" alignment="CENTER" layoutX="547.0" layoutY="60.0" prefHeight="17.0" prefWidth="164.0" text="Produkt jest już w koszyku!" textFill="RED" />
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="chartAPane" layoutY="57.0" prefHeight="513.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <TableView fx:id="ordersTable" layoutX="85.0" layoutY="37.0" pickOnBounds="false" prefHeight="348.0" prefWidth="572.0" stylesheets="@tableView.css">
+                    <columns>
+                      <TableColumn fx:id="columnName" editable="false" prefWidth="184.0" sortable="false" style="-fx-alignment: CENTER-LEFT;" text="Nazwa" />
+                        <TableColumn fx:id="columnQuantitySub" prefWidth="56.0" />
+                      <TableColumn fx:id="columnQuantity" editable="false" minWidth="0.0" prefWidth="64.0" sortable="false" text="Ilość" />
+                        <TableColumn fx:id="columnQuantityAdd" minWidth="0.0" prefWidth="171.0" />
+                        <TableColumn fx:id="columnPrice" editable="false" prefWidth="85.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="Cena" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
          </children>
       </AnchorPane>
    </children>
