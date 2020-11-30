@@ -26,7 +26,7 @@ public class Albums {
     @Transient
     private int quantity=1;
     @Transient
-    private Button addBtn, subBtn;
+    private Button addBtn, subBtn,delBtn;
 
     public int getPrice() {
         return price;
@@ -114,6 +114,14 @@ public class Albums {
 
     public void setSubBtn(Button subBtn) {
         this.subBtn = subBtn;
+    }
+
+    public Button getDelBtn() {
+        return delBtn;
+    }
+
+    public void setDelBtn(Button delBtn) {
+        this.delBtn = delBtn;
     }
 
     @Override

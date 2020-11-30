@@ -1,6 +1,7 @@
 package gui;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -37,7 +40,7 @@ import static java.awt.Color.red;
 
 public class HomeController extends ProjectMethods implements Initializable {
     @FXML
-    private Label accountLabel,accountLabel2,emailLabel,chartLabel,ordersLabel,cityLabel,panelName,albumNameLabel,albumAuthorLabel,descriptionField,statusLabel,releaseDateLabel,inChartLabel;
+    private Label accountLabel,priceSumLabel,accountLabel2,emailLabel,chartLabel,ordersLabel,cityLabel,panelName,albumNameLabel,albumAuthorLabel,descriptionField,statusLabel,releaseDateLabel,inChartLabel;
     @FXML
     private JFXButton logoutBtn, exitBtn,albumsBtn,changePasswordBtn,newPasswordSaveBtn,accountBtn,addToCartBtn,chartBtn;
     @FXML
@@ -51,7 +54,7 @@ public class HomeController extends ProjectMethods implements Initializable {
     @FXML
     private TableView<Albums> ordersTable;
     @FXML
-    private TableColumn<Albums,String> columnName,columnQuantitySub,columnQuantityAdd;
+    private TableColumn<Albums,String> columnName,columnQuantitySub,columnQuantityAdd,columnDeleteItem;
     @FXML
     private TableColumn<Albums,Integer> columnQuantity,columnPrice;
     private User user;
@@ -59,6 +62,7 @@ public class HomeController extends ProjectMethods implements Initializable {
     private ArrayList<String> albumNamesList;
     private List<Albums> dbAlbumsList,toChartAlbumList = new ArrayList<>();
     private Albums activeAlbum;
+    private ObservableList<Albums> dataForTable=null;
 
 
     @Override
@@ -179,60 +183,72 @@ public class HomeController extends ProjectMethods implements Initializable {
             toChartAlbumList.add(activeAlbum);
             inChartLabel.setText("Produkt dodany do koszyka!");
             inChartLabel.setTextFill(javafx.scene.paint.Color.GREEN);
+
         }else{
             inChartLabel.setText("Produkt jest już w koszyku!");
             inChartLabel.setTextFill(javafx.scene.paint.Color.RED);
 
         }
     }
+
+
+
     //CHART PANE    ***************************************
-
-
     public void chartBtnOnAction(javafx.event.ActionEvent actionEvent){
         hideAllPanes();
         chartAPane.setVisible(true);
         ordersTable.setEditable(false);
-        ObservableList<Albums> dataForTable=null;
         if(toChartAlbumList != null) {
             dataForTable = FXCollections.observableArrayList(toChartAlbumList);
+            priceSumLabel.setText(String.valueOf(calcNewSumPrice(dataForTable)+" PLN"));
         }
         for(Albums a : toChartAlbumList){
             a.setAddBtn(new Button());
             a.setSubBtn(new Button());
+            a.setDelBtn(new Button());
+            a.getDelBtn().setText("X");
             a.getAddBtn().setText("+");
             a.getSubBtn().setText("-");
         }
-        for(Albums a : dataForTable){ // Adding action for add and sub btn of quantity value
+        for(Albums a : dataForTable)// Adding action for add and sub btn of quantity value
+        {
             a.getAddBtn().setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    if(a.getQuantity()<10)
-                    a.setQuantity(a.getQuantity()+1);
-                    ordersTable.refresh();
+                    if(a.getQuantity()<10) {
+                        a.setQuantity(a.getQuantity() + 1);
+                        priceSumLabel.setText(String.valueOf(calcNewSumPrice(dataForTable)+" PLN"));
+                        System.out.println("OBLICZYLEM:   "+ calcNewSumPrice(dataForTable));
+                        System.out.println("Lista:   "+ dataForTable);
+                        ordersTable.refresh();
+                    }
                 }
             });
             a.getSubBtn().setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    if(a.getQuantity()>=2)
-                        a.setQuantity(a.getQuantity()-1);
+                    if(a.getQuantity()>=2) {
+                        a.setQuantity(a.getQuantity() - 1);
+                        priceSumLabel.setText(String.valueOf(calcNewSumPrice(dataForTable) + " PLN"));
+                        System.out.println("OBLICZYLEM:   "+ calcNewSumPrice(dataForTable));
+                        System.out.println("Lista:   "+ dataForTable);
+                    }
                     ordersTable.refresh();
                 }
             });
-
+            a.getDelBtn().setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    deleteItemFromChart(a);
+                    priceSumLabel.setText(String.valueOf(calcNewSumPrice(dataForTable)+" PLN"));
+                    a.setQuantity(1);
+                    ordersTable.refresh();
+                }
+            });
         }
-        columnName.setCellValueFactory(new PropertyValueFactory<Albums,String>("albumName"));
-        columnPrice.setCellValueFactory(new PropertyValueFactory<Albums,Integer>("price"));
-        columnQuantity.setCellValueFactory(new PropertyValueFactory<Albums,Integer>("quantity"));
-        columnQuantitySub.setCellValueFactory(new PropertyValueFactory<Albums,String>("subBtn"));
-        columnQuantityAdd.setCellValueFactory(new PropertyValueFactory<Albums,String>("addBtn"));
-        columnName.setStyle( "-fx-alignment: CENTER-LEFT;");
-        columnPrice.setStyle( "-fx-alignment: CENTER-RIGHT;");
-        columnQuantity.setStyle("-fx-alignment: CENTER;");
-        columnQuantitySub.setStyle("-fx-alignment: CENTER-RIGHT;");
-        ordersTable.setPlaceholder(new Label("Koszyk jest pusty"));
-        ordersTable.setSelectionModel(null);
+        configureOrdersTable();
         ordersTable.setItems(dataForTable);
+
     }
 
     public void exitBtnOnAction(javafx.event.ActionEvent actionEvent){
@@ -263,6 +279,42 @@ public class HomeController extends ProjectMethods implements Initializable {
 
     }
 
+    public void deleteItemFromChart(Albums a){
+        a.setQuantity(0);
+        dataForTable.remove(a);
+        toChartAlbumList.remove(a);
+    }
 
+    public double calcNewSumPrice(List<Albums> albums){
+        double price=0;
+        for (Albums a: albums ){
+            price += a.getPrice()*a.getQuantity();
+            System.out.println("sumuje:  " + a.getAlbumName());
+        }
+        return price;
+    }
 
+    public void configureOrdersTable(){
+        columnName.setCellValueFactory(new PropertyValueFactory<Albums,String>("albumName"));
+        columnPrice.setCellValueFactory(new PropertyValueFactory<Albums,Integer>("price"));
+        columnQuantity.setCellValueFactory(new PropertyValueFactory<Albums,Integer>("quantity"));
+        columnQuantitySub.setCellValueFactory(new PropertyValueFactory<Albums,String>("subBtn"));
+        columnQuantityAdd.setCellValueFactory(new PropertyValueFactory<Albums,String>("addBtn"));
+        columnDeleteItem.setCellValueFactory(new PropertyValueFactory<Albums,String>("delBtn"));
+        columnDeleteItem.setStyle("-fx-alignment: CENTER-RIGHT;");
+        columnName.setStyle( "-fx-alignment: CENTER-LEFT;");
+        columnPrice.setStyle( "-fx-alignment: CENTER-RIGHT;");
+        columnQuantity.setStyle("-fx-alignment: CENTER;");
+        columnQuantitySub.setStyle("-fx-alignment: CENTER-RIGHT;");
+        ordersTable.setPlaceholder(new Label("Koszyk jest pusty"));
+        ordersTable.setSelectionModel(null);
+        ordersTable.setTableMenuButtonVisible(false);
+        Pane header = (Pane) ordersTable.lookup("TableHeaderRow");
+        if (header.isVisible()){
+            header.setMaxHeight(0);
+            header.setMinHeight(0);
+            header.setPrefHeight(0);
+            header.setVisible(false);
+        }
+    }
 }

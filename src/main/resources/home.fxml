@@ -243,15 +243,42 @@
             </AnchorPane>
             <AnchorPane fx:id="chartAPane" layoutY="57.0" prefHeight="513.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <TableView fx:id="ordersTable" layoutX="85.0" layoutY="37.0" pickOnBounds="false" prefHeight="348.0" prefWidth="572.0" stylesheets="@tableView.css">
+                  <TableView fx:id="ordersTable" layoutX="65.0" layoutY="80.0" pickOnBounds="false" prefHeight="193.0" prefWidth="592.0" stylesheets="@tableView.css">
                     <columns>
                       <TableColumn fx:id="columnName" editable="false" prefWidth="184.0" sortable="false" style="-fx-alignment: CENTER-LEFT;" text="Nazwa" />
                         <TableColumn fx:id="columnQuantitySub" prefWidth="56.0" />
                       <TableColumn fx:id="columnQuantity" editable="false" minWidth="0.0" prefWidth="64.0" sortable="false" text="Ilość" />
-                        <TableColumn fx:id="columnQuantityAdd" minWidth="0.0" prefWidth="171.0" />
-                        <TableColumn fx:id="columnPrice" editable="false" prefWidth="85.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="Cena" />
+                        <TableColumn fx:id="columnQuantityAdd" minWidth="0.0" prefWidth="154.0" />
+                        <TableColumn fx:id="columnPrice" editable="false" prefWidth="89.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="Cena" />
+                        <TableColumn fx:id="columnDeleteItem" prefWidth="40.0" />
                     </columns>
                   </TableView>
+                  <Label layoutX="65.0" layoutY="290.0" prefHeight="23.0" prefWidth="91.0" text="Razem">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Line endX="492.0" layoutX="166.0" layoutY="320.0" startX="-100.0" />
+                  <Label fx:id="priceSumLabel" alignment="CENTER_RIGHT" layoutX="494.0" layoutY="290.0" prefHeight="23.0" prefWidth="164.0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="67.0" layoutY="58.0" text="Nazwa">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="320.0" layoutY="58.0" text="Ilość">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="576.0" layoutY="57.0" text="Cena">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
          </children>
       </AnchorPane>
