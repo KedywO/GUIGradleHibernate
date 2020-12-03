@@ -93,6 +93,7 @@ public class RegisterController extends ProjectMethods implements Initializable 
                 registerInfoLabel.setTextFill(Color.GREEN);
                 registerInfoLabel.setText("Registered successfully!");
                 em.getTransaction().begin();
+                System.out.println(user);
                 em.persist(user);
                 em.getTransaction().commit();
                 em.close();

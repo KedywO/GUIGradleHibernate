@@ -24,15 +24,18 @@ import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.List;
 
@@ -40,13 +43,13 @@ import static java.awt.Color.red;
 
 public class HomeController extends ProjectMethods implements Initializable {
     @FXML
-    private Label accountLabel,priceSumLabel,accountLabel2,emailLabel,chartLabel,ordersLabel,cityLabel,panelName,albumNameLabel,albumAuthorLabel,descriptionField,statusLabel,releaseDateLabel,inChartLabel;
+    private Label accountLabel,priceSumLabel,accountLabel2,emailLabel,ordersLabel,cityLabel,priceLabel,panelName,albumNameLabel,albumAuthorLabel,descriptionField,statusLabel,releaseDateLabel,inChartLabel;
     @FXML
-    private JFXButton logoutBtn, exitBtn,albumsBtn,changePasswordBtn,newPasswordSaveBtn,accountBtn,addToCartBtn,chartBtn;
+    private JFXButton logoutBtn, exitBtn,albumsBtn,changePasswordBtn,newPasswordSaveBtn,accountBtn,addToCartBtn,chartBtn,checkoutBtn;
     @FXML
     private TextField searchField;
     @FXML
-    private AnchorPane accountAPane,albumsAPane,chartAPane;
+    private AnchorPane accountAPane,albumsAPane,chartAPane,mainHomePane;
     @FXML
     private PasswordField confirmNewPasswordField,newPasswordField;
     @FXML
@@ -62,7 +65,10 @@ public class HomeController extends ProjectMethods implements Initializable {
     private ArrayList<String> albumNamesList;
     private List<Albums> dbAlbumsList,toChartAlbumList = new ArrayList<>();
     private Albums activeAlbum;
-    private ObservableList<Albums> dataForTable=null;
+    private ObservableList<Albums> dataForTable;
+    private DecimalFormat dec;
+    private boolean changePasswordActive;
+
 
 
     @Override
@@ -80,6 +86,8 @@ public class HomeController extends ProjectMethods implements Initializable {
         for(Albums a : dbAlbumsList){
             albumNamesList.add(a.getAlbumName());
         }
+        dec = new DecimalFormat("#0.00");
+
 
 
     }
@@ -88,7 +96,10 @@ public class HomeController extends ProjectMethods implements Initializable {
         closeHandler(actionEvent);
         createLoginForm();
     }
-    //ACCOUNT PANE
+
+
+
+    //ACCOUNT PANE   *************************************
     public void accountBtnOnAction(javafx.event.ActionEvent actionEvent){
         hideAllPanes();
         accountAPane.setVisible(true);
@@ -98,15 +109,30 @@ public class HomeController extends ProjectMethods implements Initializable {
         accountLabel2.setText(user.getUsername());
         emailLabel.setText(user.getMail());
         cityLabel.setText(user.getCity());
-        ordersLabel.setText(String.valueOf(user.getOrders()));
-        panelName.setText("Account");
-
+        panelName.setText("Twoje konto");
+        EntityManager em = EMF.createEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cr = cb.createQuery(Long.class);
+        Root<Order> root =  cr.from(Order.class);
+        cr.select(cb.count(root)).where(cb.equal(root.get("userId"),1));
+        Long res = em.createQuery(cr).getSingleResult();
+        ordersLabel.setText(String.valueOf(res));
+        em.close();
+        changePasswordActive=false;
     }
 
     public void changePasswordBtnOnAction(javafx.event.ActionEvent actionEvent){
-        confirmNewPasswordField.setVisible(true);
-        newPasswordField.setVisible(true);
-        newPasswordSaveBtn.setVisible(true);
+        if(!changePasswordActive) {
+            changePasswordActive=true;
+            confirmNewPasswordField.setVisible(true);
+            newPasswordField.setVisible(true);
+            newPasswordSaveBtn.setVisible(true);
+        }else{
+            confirmNewPasswordField.setVisible(false);
+            newPasswordField.setVisible(false);
+            newPasswordSaveBtn.setVisible(false);
+            changePasswordActive=false;
+        }
     }
 
     public void setNewPasswordSaveBtnOnAction(ActionEvent actionEvent){
@@ -137,7 +163,7 @@ public class HomeController extends ProjectMethods implements Initializable {
         hideAllPanes();
         inChartLabel.setVisible(false);
         albumsAPane.setVisible(true);
-        panelName.setText("Albums");
+        panelName.setText("Albumy");
         startSearch();
         setMovieData(new Random().nextInt(dbAlbumsList.size()));
     }
@@ -159,6 +185,8 @@ public class HomeController extends ProjectMethods implements Initializable {
         descriptionField.setText(dbAlbumsList.get(movieIndex).getAlbumDescription());
         statusLabel.setText(dbAlbumsList.get(movieIndex).getStatus());
         releaseDateLabel.setText(String.valueOf(dbAlbumsList.get(movieIndex).getOutYear()));
+
+        priceLabel.setText(String.valueOf(dec.format(dbAlbumsList.get(movieIndex).getPrice())+ " PLN"));
         activeAlbum = dbAlbumsList.get(movieIndex);
     }
 
@@ -177,7 +205,6 @@ public class HomeController extends ProjectMethods implements Initializable {
     }
 
     public void addToCartBtnOnAction(ActionEvent actionEvent){
-        System.out.println("DODAJE  "+ activeAlbum);
         inChartLabel.setVisible(true);
         if(!isInChart(activeAlbum)){
             toChartAlbumList.add(activeAlbum);
@@ -195,12 +222,19 @@ public class HomeController extends ProjectMethods implements Initializable {
 
     //CHART PANE    ***************************************
     public void chartBtnOnAction(javafx.event.ActionEvent actionEvent){
+        if(CheckOutController.checkoutDone==true)
+        {
+            toChartAlbumList.clear();
+            CheckOutController.checkoutDone=false;
+        }
+        panelName.setText("Koszyk");
         hideAllPanes();
         chartAPane.setVisible(true);
         ordersTable.setEditable(false);
+
         if(toChartAlbumList != null) {
-            dataForTable = FXCollections.observableArrayList(toChartAlbumList);
-            priceSumLabel.setText(String.valueOf(calcNewSumPrice(dataForTable)+" PLN"));
+            dataForTable= FXCollections.observableArrayList(toChartAlbumList);
+            priceSumLabel.setText(String.valueOf(dec.format(calcNewSumPrice(dataForTable))+" PLN"));
         }
         for(Albums a : toChartAlbumList){
             a.setAddBtn(new Button());
@@ -218,8 +252,6 @@ public class HomeController extends ProjectMethods implements Initializable {
                     if(a.getQuantity()<10) {
                         a.setQuantity(a.getQuantity() + 1);
                         priceSumLabel.setText(String.valueOf(calcNewSumPrice(dataForTable)+" PLN"));
-                        System.out.println("OBLICZYLEM:   "+ calcNewSumPrice(dataForTable));
-                        System.out.println("Lista:   "+ dataForTable);
                         ordersTable.refresh();
                     }
                 }
@@ -230,8 +262,6 @@ public class HomeController extends ProjectMethods implements Initializable {
                     if(a.getQuantity()>=2) {
                         a.setQuantity(a.getQuantity() - 1);
                         priceSumLabel.setText(String.valueOf(calcNewSumPrice(dataForTable) + " PLN"));
-                        System.out.println("OBLICZYLEM:   "+ calcNewSumPrice(dataForTable));
-                        System.out.println("Lista:   "+ dataForTable);
                     }
                     ordersTable.refresh();
                 }
@@ -248,23 +278,23 @@ public class HomeController extends ProjectMethods implements Initializable {
         }
         configureOrdersTable();
         ordersTable.setItems(dataForTable);
-
     }
 
-    public void exitBtnOnAction(javafx.event.ActionEvent actionEvent){
-        closeHandler(actionEvent);
-        EMF.emfDestroy();
+    public void checkoutBtnOnAction(ActionEvent actionEvent){
+        if(!toChartAlbumList.isEmpty()) {
+            createCheckOutForm(toChartAlbumList, calcNewSumPrice(toChartAlbumList), this.user, mainHomePane);
+            mainHomePane.setDisable(true);
+            hideAllPanes();
+
+        }
     }
 
-    public void setUser(User user){
-        this.user = user;
-        accountLabel.setText(user.getUsername());
-    }
-
-    public void hideAllPanes(){
-        accountAPane.setVisible(false);
-        albumsAPane.setVisible(false);
-        chartAPane.setVisible(false);
+    public double calcNewSumPrice(List<Albums> albums){
+        double price=0;
+        for (Albums a: albums ){
+            price += a.getPrice()*a.getQuantity();
+        }
+        return price;
     }
 
     public boolean isInChart(Albums a){
@@ -277,21 +307,6 @@ public class HomeController extends ProjectMethods implements Initializable {
             return false;
         }else return false;
 
-    }
-
-    public void deleteItemFromChart(Albums a){
-        a.setQuantity(0);
-        dataForTable.remove(a);
-        toChartAlbumList.remove(a);
-    }
-
-    public double calcNewSumPrice(List<Albums> albums){
-        double price=0;
-        for (Albums a: albums ){
-            price += a.getPrice()*a.getQuantity();
-            System.out.println("sumuje:  " + a.getAlbumName());
-        }
-        return price;
     }
 
     public void configureOrdersTable(){
@@ -317,4 +332,38 @@ public class HomeController extends ProjectMethods implements Initializable {
             header.setVisible(false);
         }
     }
+
+    public void exitBtnOnAction(javafx.event.ActionEvent actionEvent){
+        closeHandler(actionEvent);
+        EMF.emfDestroy();
+
+    }
+
+    public void setUser(User user){
+        this.user = user;
+        accountLabel.setText(user.getUsername());
+    }
+
+    public void hideAllPanes(){
+        accountAPane.setVisible(false);
+        albumsAPane.setVisible(false);
+        chartAPane.setVisible(false);
+    }
+
+    public void deleteItemFromChart(Albums a){
+        a.setQuantity(0);
+        dataForTable.remove(a);
+        toChartAlbumList.remove(a);
+    }
+
+    public void clearChart(){
+        toChartAlbumList.clear();ordersTable.refresh();
+        hideAllPanes();
+        System.out.println("dziala");
+
+    }
+
+
+
+
 }

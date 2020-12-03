@@ -15,20 +15,20 @@
     <children>
         <AnchorPane fx:id="loginPane" layoutX="392.0" layoutY="9.0" prefHeight="380.0" prefWidth="355.0" style="-fx-background-color: #FFFFFF;">
             <children>
-                <Label focusTraversable="false" layoutX="59.0" layoutY="127.0" text="Username" textAlignment="CENTER">
+                <Label focusTraversable="false" layoutX="59.0" layoutY="127.0" text="Nazwa użytkownika" textAlignment="CENTER">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label focusTraversable="false" layoutX="59.0" layoutY="207.0" text="Password">
+                <Label focusTraversable="false" layoutX="59.0" layoutY="207.0" text="Hasło">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <JFXPasswordField fx:id="passwordField" focusColor="#6c11df" layoutX="59.0" layoutY="227.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="268.0" promptText="Password" />
-                <JFXTextField fx:id="loginField" focusColor="#6c11df" layoutX="59.0" layoutY="147.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="268.0" promptText="Username" />
-                <JFXButton fx:id="loginBtn" buttonType="RAISED" defaultButton="true" focusTraversable="false" layoutX="59.0" layoutY="295.0" onAction="#loginBtnOnAction" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: #6C11DF;" text="Login" textFill="WHITE" />
-                <JFXButton fx:id="closeBtn" buttonType="RAISED" cancelButton="true" focusTraversable="false" layoutX="59.0" layoutY="343.0" onAction="#closeBtnButtonOnAction" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: #6C11DF;" text="Cancel" textFill="WHITE" />
+                <JFXPasswordField fx:id="passwordField" focusColor="#6c11df" layoutX="59.0" layoutY="227.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="268.0" promptText="Hasło" />
+                <JFXTextField fx:id="loginField" focusColor="#6c11df" layoutX="59.0" layoutY="147.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="268.0" promptText="Nazwa użytkownika" />
+                <JFXButton fx:id="loginBtn" buttonType="RAISED" defaultButton="true" focusTraversable="false" layoutX="59.0" layoutY="295.0" onAction="#loginBtnOnAction" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: #6C11DF;" text="Zaloguj" textFill="WHITE" />
+                <JFXButton fx:id="closeBtn" buttonType="RAISED" cancelButton="true" focusTraversable="false" layoutX="59.0" layoutY="343.0" onAction="#closeBtnButtonOnAction" prefHeight="25.0" prefWidth="268.0" style="-fx-background-color: #6C11DF;" text="Zamknij" textFill="WHITE" />
                 <ImageView fx:id="shieldIcon" fitHeight="96.0" fitWidth="96.0" focusTraversable="true" layoutX="145.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" visible="true">
                     <image>
                         <Image url="@../java/gui/images/shieldImage.png" />
@@ -49,17 +49,17 @@
         </AnchorPane>
         <AnchorPane layoutX="-16.0" prefHeight="399.0" prefWidth="408.0" style="-fx-background-color: #6C11DF;">
             <children>
-                <Label focusTraversable="false" layoutX="51.0" layoutY="28.0" prefHeight="59.0" prefWidth="342.0" text="Welcome to the HHProject v1.0" textFill="WHITE">
+                <Label focusTraversable="false" layoutX="51.0" layoutY="28.0" prefHeight="59.0" prefWidth="342.0" text="Witamy w HHProject v1.0" textFill="WHITE">
                     <font>
                         <Font name="Calibri" size="24.0" />
                     </font>
                 </Label>
-                <Label focusTraversable="false" layoutX="51.0" layoutY="87.0" text="Don't have an account? " textFill="WHITE">
+                <Label focusTraversable="false" layoutX="51.0" layoutY="87.0" text="Nie masz jeszcze konta?" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <JFXButton fx:id="registerBtn" focusTraversable="false" layoutX="200.0" layoutY="82.0" onAction="#registerBtnOnAction" style="-fx-background-color: #6C11DF;" text="Register now." textFill="WHITE" underline="true">
+                <JFXButton fx:id="registerBtn" focusTraversable="false" layoutX="200.0" layoutY="82.0" onAction="#registerBtnOnAction" style="-fx-background-color: #6C11DF;" text="Zarejestruj się teraz." textFill="WHITE" underline="true">
                     <font>
                         <Font size="14.0" />
                     </font>

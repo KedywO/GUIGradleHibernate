@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: #ff0000; -fx-border-width: 2; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CheckOutController">
+   <children>
+      <JFXTextField fx:id="fNameField" focusColor="#6c11df" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="267.0" promptText="Imię" />
+      <JFXTextField fx:id="lNameField" focusColor="#6c11df" layoutX="14.0" layoutY="95.0" prefHeight="25.0" prefWidth="267.0" promptText="Nazwisko" />
+      <JFXTextField fx:id="adressField" focusColor="#6c11df" layoutX="14.0" layoutY="145.0" prefHeight="25.0" prefWidth="267.0" promptText="Adres" />
+      <JFXTextField fx:id="cityField" focusColor="#6c11df" layoutX="14.0" layoutY="200.0" prefHeight="25.0" prefWidth="267.0" promptText="Miasto" />
+      <JFXTextField fx:id="zipCodeField" focusColor="#6c11df" layoutX="14.0" layoutY="254.0" prefHeight="25.0" prefWidth="267.0" promptText="Kod pocztowy" />
+      <Line endX="45.0" endY="371.0" layoutX="255.0" layoutY="16.0" startX="45.0" startY="-6.0" />
+      <Label layoutX="79.0" layoutY="14.0" text="Wprowadz dane">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="SavaDataBtn" layoutX="112.0" layoutY="348.0" onAction="#SavaDataBtnOnAction" style="-fx-background-color: #6C11DF #6C11DF;" text="Zapisz" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="fNameLabel" layoutX="319.0" layoutY="50.0" prefHeight="17.0" prefWidth="267.0" text="Imię">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lNameLabel" layoutX="319.0" layoutY="80.0" prefHeight="17.0" prefWidth="267.0" text="Nazwisko">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="adressLabel" layoutX="319.0" layoutY="110.0" prefHeight="17.0" prefWidth="267.0" text="Adres">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="cityLabel" layoutX="319.0" layoutY="140.0" prefHeight="17.0" prefWidth="267.0" text="Miasto">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="zipCodeLabel" layoutX="319.0" layoutY="170.0" prefHeight="17.0" prefWidth="267.0" text="Kod pocztowy">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXCheckBox fx:id="termsBox" layoutX="319.0" layoutY="198.0" prefHeight="19.0" prefWidth="93.0" text="Regulamin">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXButton fx:id="confimDataBtn" layoutX="400.0" layoutY="348.0" onAction="#confimDataBtnOnAction" style="-fx-background-color: #6C11DF #6C11DF;" text="Zamawiam" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="termsLabel" layoutX="435.0" layoutY="199.0" prefHeight="17.0" prefWidth="151.0" text="* Potwierdz regulamin" textFill="RED" visible="false" />
+      <JFXButton fx:id="exitBtn" layoutX="565.0" onAction="#exitBtnOnAction" prefHeight="3.0" prefWidth="34.0" text="X" textFill="#6c11df">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="zipCodeLabel1" layoutX="316.0" layoutY="244.0" text="Do zapłaty" textOverrun="CLIP">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="priceLabelCheckout" layoutX="394.0" layoutY="244.0" prefHeight="20.0" prefWidth="192.0" text="0,00 PLN">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>

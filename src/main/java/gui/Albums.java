@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Albums {
     @Id
-    private long albumId;
+    private int albumId;
     @Column (name = "name")
     private String albumName;
     @Column (name = "author")
@@ -42,14 +42,6 @@ public class Albums {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public long getAlbumId() {
-        return albumId;
-    }
-
-    public void setAlbumId(long albumId) {
-        this.albumId = albumId;
     }
 
     public String getAlbumName() {
@@ -122,6 +114,14 @@ public class Albums {
 
     public void setDelBtn(Button delBtn) {
         this.delBtn = delBtn;
+    }
+
+    public int getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(int albumId) {
+        this.albumId = albumId;
     }
 
     @Override

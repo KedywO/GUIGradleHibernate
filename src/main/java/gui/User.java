@@ -9,7 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
-    @Column(name = "name")
+
+    @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
@@ -21,7 +22,7 @@ public class User implements Serializable {
     private int orders=0;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "userid")
+    @Column (name = "id")
     private int id;
 
     @Override

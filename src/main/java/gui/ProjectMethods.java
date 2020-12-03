@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,6 +27,7 @@ import static javafx.scene.paint.Color.TRANSPARENT;
 
 public class ProjectMethods extends Application {
     private User user;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -97,14 +99,12 @@ public class ProjectMethods extends Application {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("home.fxml"));
             Parent root = loader.load();
-            HomeController controller = loader.getController();
-
+            HomeController homeController = loader.getController();
 
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(new Scene(root, 923,570));
-
-            controller.setUser(user);
+            homeController.setUser(user);
             stage.show();
         }catch (Exception e){
             e.printStackTrace();
@@ -127,6 +127,21 @@ public class ProjectMethods extends Application {
 
     }
 
+    public void createCheckOutForm(List<Albums> albums, double price, User user1, AnchorPane pane){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("checkout.fxml"));
+            Parent root = loader.load();
+            CheckOutController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root, 600,400));
+            controller.setData(albums,price,user1,pane);
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void rotateButton(JFXButton btn){
 
 
@@ -145,6 +160,14 @@ public class ProjectMethods extends Application {
                 rt2.setOnFinished(event1 -> rotatedpane =false);
             });*/
 
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 

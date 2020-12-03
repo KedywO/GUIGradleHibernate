@@ -51,10 +51,10 @@ public class LoginController extends ProjectMethods implements Initializable {
     }
 
     public void loginBtnOnAction(javafx.event.ActionEvent actionEvent) throws InterruptedException {
-        setUser("radek","zxc");
-        closeHandler(actionEvent);
-        createHomeForm();
-        /*if(checkUser(loginField.getText(),passwordField.getText())){
+        //setUser("radek","zxc");
+        //closeHandler(actionEvent);
+        //createHomeForm();
+        if(checkUser(loginField.getText(),passwordField.getText())){
             setUser(loginField.getText(),passwordField.getText());
             closeHandler(actionEvent);
             createHomeForm();
@@ -62,11 +62,11 @@ public class LoginController extends ProjectMethods implements Initializable {
         }
         else{
             loginInfoLabel.setVisible(false);
-            loginInfoLabel.setText("Login unsuccessful!");
+            loginInfoLabel.setText("Logowanie sie nie powiod\u0142o!");
             loginInfoLabel.setTextFill(Color.RED);
             loginInfoLabel.setVisible(true);
             rotateButton(loginBtn);
-        }*/
+        }
     }
 
     public void closeBtnButtonOnAction(javafx.event.ActionEvent actionEvent) {
